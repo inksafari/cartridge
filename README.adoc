@@ -1,0 +1,52 @@
+= Cartridge 
+
+image::http://progressed.io/bar/35?title=Done[Done]
+
+Another LaTeX template for Chinese characters. *Disclaimer: This project is still under development.*
+
+== My Building Environment
+
+* http://xubuntu.org/[Xubuntu 14.04.3]
+* https://www.tug.org/texlive/[TeX Live 2015] ( TeX distribution )
+* http://users.phys.psu.edu/~collins/software/latexmk-jcc/[Latexmk] ( LaTeX build tool  )
+* http://www.luatex.org/[LuaTeX] & https://osdn.jp/projects/luatex-ja/[LuaTeX-ja] or http://xetex.sourceforge.net/[XeTeX] & https://github.com/CTeX-org/ctex-kit/blob/master/xeCJK/xeCJK.dtx[xeCJK]
+* https://www.ctan.org/pkg/biblatex[BibLaTeX] & http://biblatex-biber.sourceforge.net/[Biber]
+
+////
+* https://github.com/leo-liu/zhmakeindex[zhmakeindex]
+* https://wiki.gnome.org/Apps/Gedit[Gedit] ( text editor )
+*** Forward Search (Source to PDF): kbd:[Ctrl+left click] or kbd:[Ctrl+Alt+F]
+* https://wiki.gnome.org/Apps/Evince[Evince] ( PDF viewer, supports SyncTeX & Auto-refreshing )
+** Inverse Search (PDF to Source): kbd:[Ctrl+click]
+////
+
+////
+The following packages are required:
+
+* scrlayer-scrpage ( in the koma-script bundle )
+* chapterthumb ( in the koma-script-examples package )
+* coderemarks ( github.com/miekg/coderemarks )
+* fontawesome
+* tcolorbox
+* enumitem
+* biblatex & biber
+* hyperref
+* listings
+* booktabs
+* xcolor
+* ...
+////
+
+== Todo
+
+- [ ] 着重號
+- [ ] 專題
+- [ ] 圖表
+- [ ] 參考文獻
+- [ ] 垂直時間軸
+- [ ] 版面與字型
+
+== LICENSE
+
+image::http://opentf.github.io/GuokrBadge/cc/gs/cc_byncsa.flat.guokr.32.svg[Creative Commons, link="https://creativecommons.org/licenses/by-nc-sa/4.0/"]
+

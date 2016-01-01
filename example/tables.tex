@@ -1,0 +1,36 @@
+\chapter{表}
+%% ------------------------------------------------------------
+\begin{table}[htbp]
+    \centering                  % used for centering table
+    \begin{tabular}{c c c c}    % centered columns (4 columns)
+        \hline\hline                
+        Col\#1 & Col\#2 & Col\#3 & Col\#4 \\ [0.5ex]
+        \hline                      
+        1 & 一 & A & 壹 \\
+        2 & 二 & B & 貳 \\
+        3 & 三 & C & 參 \\ [1ex]    % [1ex] adds vertical space
+        \hline                      
+    \end{tabular}
+    \caption{Sample table}         % title of Table
+    \label{tab:123table}           % is used to refer this table in the text
+\end{table}
+
+%% ------------------------------------------------------------
+\section{三線表}
+\begin{table}
+  \centering
+  \renewcommand{\arraystretch}{1.6}
+  \begin{tabular}{lcc}
+    \toprule
+        col1 & col2 & col3 \ \
+    \cmidrule(r){1-1}\cmidrule(lr){2-2}\cmidrule(l){3-3}          
+        A & 1 & One   \ \
+        B & 2 & Two   \ \
+        C & 3 & Third \ \
+    \bottomrule
+  \end{tabular}
+  \caption{三線表}
+  \label{tab:三線表}
+\end{table}
+
+%% ------------------------------------------------------------

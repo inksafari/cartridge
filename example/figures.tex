@@ -1,0 +1,20 @@
+\section{Figure}
+%% ------------------------------------------------------------
+\begin{figure}[h!]
+\centering
+\includegraphics[
+  height=\dimexpr\pagegoal-\pagetotal-4\baselineskip\relax,
+  width=0.6\textwidth,
+  keepaspectratio]
+{example-image}
+\caption{figure name}
+\label{fig:key}
+\end{figure}
+
+\subsection{Subfigure}
+%% ------------------------------------------------------------
+\begin{figure}
+    \includegraphics[width=.48\linewidth]{example-image-a}\hfill
+    \includegraphics[width=.48\linewidth]{example-image-b}
+    \caption{MWE to demonstrate how to place to images side-by-side}
+\end{figure}

@@ -1,0 +1,17 @@
+\chapter{Listings}
+\section{一般}
+\begin{lstlisting}[language=Python, caption=This is caption of code block]
+
+ ''' A multi-line
+     comment.'''
+ def sub_word(mo):
+     ''' Single line comment.'''
+     word = mo.group('word')   # Inline comment
+     if word in keywords[language]:              
+         return quote + word + quote              
+     else:                                       
+         return word
+\end{lstlisting}
+
+\section{嵌入}
+\lstinputlisting[label=src:hello,language=Ruby,caption=The Greeter class]{files/hello.rb}

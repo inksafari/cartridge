@@ -1,0 +1,583 @@
+% Cartridge | (c) 2016 林子楀（ Lin Tzu-Yu ）| CC BY-NC-SA 4.0 License
+% https://github.com/inksafari/cartridge
+
+% ****************************************************************************
+% Document Class Definition（ Global Settings ）
+% ****************************************************************************
+\documentclass[%
+    paper=A4,               % common are A4, B5 or custom（18.5cm:23cm）
+    pagesize,               % everything gets calculated correctly
+    twoside=true,           % oneside or twoside printing
+    open=right,             % doublepage cleaning ends up right side
+    numbers=noenddot,       % no dot/period after the last chapter number
+    draft=false             % if true: no images, layout errors shown
+]{scrbook}                  % “book”-like class of the KOMA-Script bundle
+
+% ****************************************************************************
+% Load and Configure Packages
+% ****************************************************************************
+
+%% Koma-Script Settings
+%% ------------------------------------------------------------
+%\KOMAoptions{}
+%\recalctypearea                    % or use "pagesize" option
+
+%% Colors
+%% ------------------------------------------------------------
+%\usepackage{color} 
+\usepackage[dvipsnames*,svgnames]{xcolor} 
+\selectcolormodel{natural}          % natural, cmyk or RGB 
+\input{settings/color}              % Color Definitions
+
+%% Graphpics
+%% ------------------------------------------------------------ 
+\usepackage{array}
+\usepackage{tikz}                   
+\usetikzlibrary{shapes,arrows,decorations.pathreplacing,decorations.pathmorphing}
+\usetikzlibrary{mindmap}
+\usepackage[raccourcis]{fast-diagram}
+%\usepackage{pgfplots}
+%\pgfplotsset{compat=1.12}
+\usepackage[dvips,xetex]{graphicx}  % for \includegraphics{}
+\graphicspath{{img/}}
+\DeclareGraphicsExtensions{.png, .PNG, .jpg, .JPG, .jpeg, .JPEG, .ps, .PS, .pdf, .PDF}
+
+%% Tables
+%% ------------------------------------------------------------ 
+\usepackage{tabularx, booktabs, multirow}
+
+%% Captions
+%% ------------------------------------------------------------ 
+\addtokomafont{caption}{\small}
+\setkomafont{captionlabel}{\sffamily\bfseries}
+\KOMAoptions{captions=tableabove}
+
+%% Framed Boxes
+%% ------------------------------------------------------------ 
+\usepackage{tcolorbox}              % Creating colourful boxes 
+%\usepackage{mdframed}
+
+% http://www.cnblogs.com/SivilTaram/p/4842588.html
+%\newcommand{\vline}{\color{base08}\makebox[0pt]{\textbullet}\hskip-0.5pt\vrule width 1pt\hspace{\labelsep}}
+
+%% Source Code Syntax Highlighting
+%% ------------------------------------------------------------ 
+% cf. babooshka-innerjourneys.blogspot.com/2015/05/pandocmarkdownpdf.html 
+%     http://tex.stackexchange.com/questions/{83204, 122256}/
+\usepackage{listings, accsupp}
+%\usepackage{coderemarks}           % Callouts in code blocks
+\lstset{
+    inputencoding    = utf8,
+    captionpos       = b,           % sets the caption-position to bottom
+    title            =\lstname,
+    frame            = leftline,
+    columns          = flexible,
+    numbers          = left,
+    numbersep        = 5pt,
+    xleftmargin      = 2em,
+    xrightmargin     = 2em,
+    aboveskip        = 1em,
+    backgroundcolor  =\color{white},                         
+    basicstyle       =\linespread{1} \normalsize\ttfamily , 
+    commentstyle     =\color{base0E}\itshape,               % Hex #BA8BAF
+    keywordstyle     =\color{base0D}\bfseries,              % Hex #7CAFC2
+    stringstyle      =\color{base0B},                       % Hex #A1B52C
+    numberstyle      =\color{Gray}\tiny\noncopynumber,
+    breaklines       = true,
+    extendedchars    = false,
+    showspaces       = false,
+    showstringspaces = false,
+    showtabs         = false,
+    tabsize          = 2
+}
+
+\newcommand{\noncopynumber}[1]{
+    \BeginAccSupp{method=escape,ActualText={}}
+    #1
+    \EndAccSupp{}
+}
+
+%\usepackage{minted}
+%\setminted{linenos, frame=leftline, xleftmargin=2pc, numbersep=6pt}
+%\setminted[console]{linenos=false, frame=none, fontsize=\small}
+
+%% Footnotes
+%% ------------------------------------------------------------ 
+\KOMAoptions{footnotes=multiple}    % or nomultiple
+
+% <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+% Typo
+% <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< 
+
+%% Symbols
+%% ----------------------------------------------------------- 
+\usepackage{fontawesome}            % Font Awesome icons
+
+%% Math
+%% ------------------------------------------------------------ 
+%\usepackage{amsfonts,amsmath,amssymb}
+%\usepackage[all]{onlyamsmath}
+%\usepackage{mathpazo}
+%\usepackage{bm}
+%\usepackage{siunitx}    
+%\sisetup{per-mode = symbol}
+
+%\usepackage{microtype}             % Typographic Tuning
+%\UseMicrotypeSet[protrusion]{basicmath}  % disable protrusion for tt fonts
+
+%% Latin
+%% ------------------------------------------------------------ 
+% http://www.tug.dk/FontCatalogue/
+%\usepackage{lmodern}               % Latin Modern
+%\usepackage[T1]{fontenc}           % font types and character verification
+
+% Sans-Serif fonts
+%   - Helvetica or Nimbus Sans  
+%   - TEX Gyre Heros
+%   - Biolinum ( Libertine )
+
+% Serif fonts
+%   - Latin Modern
+%   - Charter
+
+\usepackage{iftex}
+\ifXeTeX
+    \usepackage{fontspec}
+\fi
+\ifLuaTeX
+    \usepackage{luatexja-fontspec}
+\fi
+%\setmainfont[Ligatures=TeX, Numbers={OldStyle, Proportional}]{TeX Gyre Pagella}
+%\setsansfont[Ligatures=TeX, Numbers={Lining, Proportional}]{TeX Gyre Heros}
+%\setmainfont[Ligatures={Common,TeX}]{Tex Gyre Termes}
+%\setsansfont[Ligatures={Common,TeX}]{Droid Sans}
+%\setmonofont{CMU Typewriter Text}
+\defaultfontfeatures{Mapping=tex-text,Scale=MatchLowercase}
+ 
+%% Chinese, search: fc-list -f '%{family}\n' :lang=zh | sort
+%% ------------------------------------------------------------
+% \setCJKmainfont[BoldFont=黑體,ItalicFont=楷書]{明體/宋體}
+% \usepackage{zxjatype}                                 % 日文排版
+% \usepackage[ipaex]{zxjafont}  
+\ifXeTeX
+    \usepackage{xltxtra,xeCJK}     
+    \xeCJKsetup{BoldFont,CJKmath,CJKchecksingle,xCJKecglue}
+    \XeTeXlinebreaklocale "zh"
+    \XeTeXlinebreakskip = 0pt plus 1pt minus 0.1pt
+    %\renewcommand{\CJKunderdotcolor}{\color{Black}}               
+    \setCJKmainfont[BoldFont=Adobe Heiti Std,          
+                    ItalicFont=Adobe Kaiti Std                           
+                  ]{Adobe Ming Std}                       
+    \setCJKmonofont{KaiGen Gothic HW TW}                  
+    \setCJKsansfont{KaiGen Gothic TW}       
+    \newCJKfontfamily[HeiTi]\HEI{Adobe Heiti Std}       % 黑體, usage: \HEI{內文}
+    \newCJKfontfamily[KaiShu]\KAI{Adobe Kaiti Std}      % 楷書 
+    \newCJKfontfamily[MingTi]\MING{Adobe Ming Std}      % 宋體 / 明朝体（日本） / 明體
+    \newCJKfontfamily[FSong]\FANGSONG{Adobe Fangsong Std} % 仿宋 / 宋朝体（日本）
+    \defaultCJKfontfeatures{Mapping=tex-text}           % 連字符
+\fi
+% search: fc-list :lang=zh | sort
+\ifLuaTeX                                               
+    %\usepackage[ipaex]{luatexja-preset}
+    \usepackage{luatexja-preset}
+    \usepackage{luatexja-ruby}
+    \ltjsetruby{fontcmd=\rmfamily}                      % 日文漢字（明朝体）： \mcfamily
+    \setmainjfont[BoldFont={Adobe Heiti Std},
+                  ItalicFont={Adobe Kaiti Std}]{Adobe Ming Std}
+    \setsansjfont{Adobe Fangsong Std}
+    \defaultjfontfeatures{JFM=kaiming}
+    \newjfontfamily\KAI{Adobe Kaiti Std}
+    \newjfontfamily\FANGSONG{Adobe Fangsong Std}
+\fi
+\usepackage{zhnumber}
+\zhnumsetup{style={Traditional,Normal}}                 % 大寫： Financial
+
+%% Hyphenation
+%% ------------------------------------------------------------
+%              babel  polyglossia
+% koma-Script   o        ?
+% biblatex      o        o
+% csquote       o        o
+\usepackage[ngerman,american]{babel}                    % 英式： british
+%\usepackage{polyglossia}
+%\setdefaultlanguage[variant=american]{english}         % 英式： variant=uk
+%\setotherlanguage[spelling=new]{german}
+
+%% Font Size
+%% ------------------------------------------------------------ 
+%\usepackage{ctexsize}                % XXX: 小四號字比 12pt 小
+%\zihao{-4}                           % 小四號字（約 12.05pt）；五號字（約 10.54pt ）
+\KOMAoptions{fontsize=12pt}           % common are 10.5pt, 11pt or 12pt
+
+%% Paragraph Formatting（請自行調整，我不確定以下拼湊出的內容是否正確）
+%% ------------------------------------------------------------ 
+% https://www.sharelatex.com/learn/Paragraph_formatting
+% http://blog.csdn.net/xiazdong/article/details/8892092
+% https://github.com/ctex-org/ctex-kit/issues/143
+% 段間距：\lineskip + \parskip
+% 行間距：\lineskip = \baselineskip（baseline 間距） * \baselinestretch（伸展因子？）
+% \lineskiplimit：當兩行字之間的距離小於 \lineskiplimit 時，行距自動設為 \lineskip。
+
+%設定參考：
+%  - \parskip 設置為 0pt，即段間距和行間距相等（橡皮長度？）。
+%  - 不建議調整 \baselinestretch 以設定行距，由於預設的 \baselineskip 大於 font size，
+%    如果 \baselinestretch 設為 1.5，得到的行距實際上大於 1.5 倍。
+%  - renewcommand{\baselinestretch}{1.5} 等同 \linespread{1.5}
+%                                   1.0      single spacing
+%                                   1.3      one-and-a-half spacing
+%                                   1.6      double spacing
+%  - 可透過 \fontsize 調整 \baselineskip，使 \baselinestretch 一直是 1。
+
+%常用套件：
+%  - 漢字的彈性間距（影響字間距之調整、段落左右對齊及斷行）：
+%    - 以一到兩字漢字寬度為佳。
+%    - LuaTEX-ja：透過 kanjiskip 調整。      
+%    - XeCJK：透過 \CJKglue 調整，預設： \hskip 0pt plus 0.08\baselineskip
+%      以 CTeX 預設值為例（5 号字 10.54pt，1.3 倍行距，版心宽度 345pt）：
+%      \hskip 0pt plus 0.08\baselineskip
+%      即 0.08 * \baselineskip * ( textwidth / fontsize ) / fontsize = 4漢字寬
+%         0.08 * 16.445pt     * ( 345pt     / 10.54pt)   / 10.54pt
+%      \baselineskip 之計算：10.54pt * 1.3 倍行距（透過 linespread 設定）* 1.2
+%      重新調整：
+%      \renewcommand{\CJKglue}{} 
+%  - indentfirst：調整 \parindent，讓段首縮進兩漢字寬度，即 2em。
+%  - setspace：調整行距，如 \sin­glespac­ing, \one­half­s­pac­ing, and \dou­blespac­ing。
+%                      或 \linestretch{}, 1 為單倍, 1.2 為 1.5 倍, 1.6 為雙倍。
+
+% http://tex.stackexchange.com/questions/161254/
+%\KOMAoptions{parskip=?}            % half / full / ...
+%\setparsizes{parindent}{parskip}{parfilskip}          
+\usepackage{indentfirst}            % 段首縮進
+\setparsizes{0pt}{0pt plus 1pt minus 0.1pt}{0pt plus 1fill} 
+\setlength{\parindent}{2em}         % 段首縮進兩漢字寬度（不縮進： 0pt ）
+\setlength{\emergencystretch}{3em}  % prevent overfull lines 
+% https://www.bdwm.net/bbs/bbstcon.php?board=MathTools&threadid=15627976       
+% lineskip / baselineskip = 20 bp / (12 bp * (6 / 5)) 
+\linespread{1.39}\selectfont        % 如果不加 \selectfont？
+
+%% <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+%% Typo（END）
+%% <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< 
+
+%% Lists
+%% ------------------------------------------------------------
+%% cf. https://github.com/hust-latex/hustthesis  
+\usepackage{enumitem}   
+\setlist{noitemsep,partopsep=0pt,topsep=.8ex}
+\setlist[1]{labelindent=\parindent}
+\setlist[description]{font=\sffamily\bfseries} 
+\setlist[enumerate,1]{label=\arabic*.,ref=\arabic*}
+\setlist[enumerate,2]{label*=\arabic*,ref=\theenumi.\arabic*}
+\setlist[enumerate,3]{label=\emph{\alph*}),ref=\theenumii\emph{\alph*}}
+% 1. 第一層
+% 2. 第一層
+%    2.1 第二層
+%    2.2 第二層
+%        a) 第三層
+%        b) 第三層
+%           A. 第四層
+%           B. 第四層
+
+%% Bibliography & References
+%% ------------------------------------------------------------ 
+\usepackage[%
+    backend = biber,                
+    style   = grain,               % github.com/inksafari/grain
+    sorting = centy]{biblatex}     % ↘源於 biblatex-caspervector 
+\addbibresource{files/books.bib}
+\addbibresource{files/online.bib}
+
+%% Quotation
+%% ------------------------------------------------------------
+\usepackage[
+  autostyle=true,
+  german=quotes,
+  english=american]{csquotes}
+
+%% Index 
+%% ------------------------------------------------------------
+% http://www.ituring.com.cn/article/207412 
+%\usepackage{zhmakeindex}          % index processor 
+%\makeindex
+
+% <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+% Page Layout
+% <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+% $(kpsewhich -var-value TEXMFDIST)/tex/latex/koma-script/
+% http://tex.stackexchange.com/a/{19497, 19505}
+
+%% BCOR ( binding correction / binding offset / gutter margins ) 
+%% ------------------------------------------------------------ 
+% 打孔裝訂 → 視打孔器型號規格而定，適合少量裝訂。裝訂膠圈容納量：
+%           http://www.amazon.co.jp/dp/{B002UKPC06, B00LEAP3SO}
+%           雙孔：頁邊距 13mm + 孔徑 6mm；多孔：頁邊距 3.6mm + 孔徑 5.5mm 
+% 膠裝裝訂 → https://www.createspace.com/Products/Book/InteriorPDF.jsp
+%
+% 補充：書背厚度之計算（來自同人誌印刷廠商）
+% ( 內文總頁數 ÷ 2 ) x ( 紙張條數 ÷ 100 ) + 1mm = 書背厚度（mm，無條件捨去小數點，取整數值）
+% 紙張條數（單紙厚度）→ 80gsm 道林紙：10 條；100gsm 道林紙：12 條
+%                    80gsm 畫刊紙： 9 條；100gsm 畫刊紙：11 條 
+
+% $(kpsewhich -var-value TEXMFDIST)/tex/latex/koma-script/typearea.sty
+% \KOMAoptions{BCOR=?, DIV=last} or 
+% \typearea[BCOR]{DIV} or 
+% \areaset[BCOR]{textwidth}{textheight} or 
+% usegeometry
+\KOMAoptions{headinclude = false, footinclude = false, mpinclude = true} 
+\areaset[9mm]{16.65cm}{22cm}   % 參照別人設定，145mm x 210mm 或 160mm x 237mm 斟酌加減
+%\recalctypearea               
+
+% 字數估測：
+% textwidth / font size
+% 1cm = 28.45274pt
+
+% 實測結果（ XeCJK ）：
+% 一橫行 / 一橫列最多 ）11pt | 12pt  中文字（不含標點符號）
+% （ cwTeX Q Ming   ）  45 | 41      
+% （ Adobe Ming Std ）  40 | 37
+% （ AR PL UMing TW ）  40 | 37
+% （ BabelStone Han ）  40 | 37
+% （ FandolSong     ）  40 | 37
+
+% 實測結果（ LuaTeX-ja ）：
+% 一橫行 / 一橫列最多 ）11pt | 12pt  中文字（不含標點符號）
+% （ cwTeX Q Ming   ）   找不到       
+% （ Adobe Ming Std ）  42 | 38
+% （ AR PL UMing TW ）  42 | 38
+% （ BabelStone Han ）  42 | 38
+% （ FandolSong     ）  42 | 38 
+
+%% Page Header（頁眉） & Footer（頁腳）
+%% ------------------------------------------------------------
+% http://tex.stackexchange.com/questions/126531/       
+\usepackage{scrlayer-scrpage}
+\automark{chapter}  % \automark deletes all prior usages of \automark or \automark*
+\automark*{section} 
+\clearpairofpagestyles
+%\addtokomafont{pagenumber}{\sffamily \bfseries}
+%\addtokomafont{pagehead}{\sffamily}
+%\addtokomafont{chapter}{\sffamily \bfseries}
+
+%雙頁且開書邊向右（偶數頁在左，奇數頁在右）：
+
+%% 頁眉（左上方）：章節名
+%% \lehead{\headmark}  % "le" means "left & even"
+
+%% 頁眉（左上方）：頁數 | 章節名
+\lehead{%
+\llap{\pagemark~~~\smash{%
+  \rule[-0.4ex]{0.4pt}{\dimexpr\headheight-\topmargin+\headsep\relax}}%
+  \hspace{2em}}%
+\headmark}
+
+%% 頁眉（右上方）：頁數
+%% \rohead{\pagemark}  % "ro" means "right & odd"
+
+%% 頁眉（右上方）：|頁數
+\rohead{%
+\headmark%
+\rlap{\hspace{2em}\smash{%
+  \rule[-0.4ex]{0.4pt}{\dimexpr\headheight-\topmargin+\headsep\relax}}%
+  ~~~\pagemark}} 
+
+%% Margin Notes
+%% ------------------------------------------------------------
+% $(kpsewhich -var-value TEXMFDIST)/tex/latex/koma-script/scrlayer-notecolumn.sty
+% usage: \makenote[<name of notecolumn>]{<note>}
+%\usepackage{scrlayer-notecolumn}
+
+%% Chapter Tab Index
+%% ------------------------------------------------------------ 
+%\usepackage{chapterthumb}     % in the koma-script-examples package
+
+%% Title Page
+%% ------------------------------------------------------------ 
+%\KOMAoptions{titlepage=on}
+%\renewcommand\coverpagetopmargin{}
+%\renewcommand\coverpagebottommargin{}
+%\renewcommand\coverpageleftmargin{}
+%\renewcommand\coverpagerightmargin{}
+
+% Table of Contents ( ToC )
+%% ------------------------------------------------------------ 
+% $(kpsewhich -var-value TEXMFDIST)/tex/latex/koma-script/{tocbasic,tocstyle}.sty
+\KOMAoptions{bibliography=totoc}
+%\KOMAoptions{listofnumbered, index=totoc}
+\setcounter{secnumdepth}{3}    % Level for numbered captions 
+\setcounter{tocdepth}{2}       % Level of chapters that appear in ToC
+% -2 no caption at all
+% -1 part
+% 0  chapter
+% 1  section    
+% 2  subsection 
+% 3  subsubsection
+% 4  paragraph
+% 5  subparagraph
+
+%% Headings Style
+%% ------------------------------------------------------------ 
+% http://tex.stackexchange.com/a/240569
+% \RedeclareSectionCommand[attributes]{name} 
+
+%%% T i t l e
+%%% ===========================================================
+%\setkomafont{title}{}
+%\setkomafont{subtitle}{}
+%\setkomafont{author}{}
+%\setkomafont{date}{}
+
+%%% P a r t
+%%% ===========================================================
+\setkomafont{part}{\normalfont\bfseries\huge}
+\setkomafont{partnumber}{\normalfont\bfseries\Huge}
+\RedeclareSectionCommand[innerskip=10pt]{part}
+\renewcommand\partformat{%
+  \strut\MakeUppercase{\lsstyle% Upper case sequences should be spaced
+    \partname~\thepart}%
+  \vspace{5pt}\hrule height 3pt%
+}
+
+%%% C h a p t e r
+%%% ===========================================================
+\KOMAoptions{chapterprefix}
+\renewcommand\raggedchapter{\centering}
+\setkomafont{chapter}{\normalfont\FANGSONG\LARGE}
+%\setkomafont{chapter}{\normalfont\bfseries\LARGE}
+%\setkomafont{chapterprefix}{\huge}
+\setkomafont{chapterprefix}{\bfseries\huge}
+\RedeclareSectionCommand[beforeskip=0pt,afterskip=40pt,innerskip=12pt]{chapter}
+\renewcommand\chapterformat{%
+  \hrule height 3pt\vspace{3pt}\hrule height 1pt\vspace{5pt}%
+  \mbox{\strut\MakeUppercase{\lsstyle% Upper case sequences should be spaced
+      \chapapp\nobreakspace\thechapter}}%
+  \hrule height 1pt%
+}
+
+%%% S e c t i o n
+%%% ===========================================================
+%\setkomafont{section}{}
+%\setkomafont{subsection}{}
+
+%%% T e x t    B o x e s
+%%% ===========================================================
+
+% <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+% Page Layout（ END ）
+% <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+       
+%% PDF metadata & Hyperlinks 
+%% ------------------------------------------------------------ 
+
+% m e t a d a t a
+\title{文件標題}
+\author{林子楀（ Lin Tzu-Yu ）}
+\date{\today}                                % or \zhtoday ( zhnumber package )
+
+\def\docTitle{文件標題測試文件標題測試}         % for custom titlepage
+\def\docAuthor{林子楀（ Lin Tzu-Yu ）}        
+\def\docDate{\zhtoday}
+
+% h y p e r r e f
+% ftp://tug.ctan.org/tex-archive/macros/latex/contrib/hyperref/doc/options.pdf 
+% 顏色（ texdoc xcolor ）：
+% - 黑 Black
+% - 橘 DarkOrange 
+% - 紅 Crimson, DeepPink, VioletRed
+% - 紫 DarkOrchid,
+% - 藍 DodgerBlue, RoyalBlue, SteelBlue
+% - 綠 SeaGreen, Teal 
+\ifXeTeX
+  \usepackage[setpagesize=false,             % page size defined by xetex
+              unicode=false,                 % unicode breaks when used with xetex
+              xetex]{hyperref}
+\else
+  \usepackage[unicode=true]{hyperref}
+\fi
+\hypersetup{          
+    pdfpagemode        = UseOutlines,
+    pdffitwindow       = true,                % window fit to page when opened
+    pdfstartview       = {FitH},              % fits the width of the page to the window
+    pdfborder          = {XYZ null null 1},
+    breaklinks         = true,
+    bookmarksopen      = true,
+    bookmarksnumbered  = true,
+    bookmarksopenlevel = 0,
+    colorlinks         = true,                % false: boxed links
+    allcolors          = Crimson}
+    
+\makeatletter
+  \hypersetup{
+    pdftitle           = {\@title},
+    pdfauthor          = {\textcopyright \@author}
+  }
+\makeatother
+
+% u r l
+%\usepackage[hyphens]{url}
+\usepackage{url}
+
+% Break URLs in a few more places. (For breaking lines, not functionality!)
+% cf. http://tex.stackexchange.com/questions/3033/forcing-linebreaks-in-url
+\expandafter\def\expandafter\UrlBreaks\expandafter{\UrlBreaks%  save the current one
+  \do\*\do\-\do\~\do\'\do\"\do\-}
+
+%% Testing
+%% ------------------------------------------------------------
+%\usepackage{layouts}
+%\usepackage{showframe}             % shows typing area and margins
+\usepackage{blindtext}              % dummy text
+\usepackage{mwe}                    % dummy graphics
+
+% ****************************************************************************
+% Content
+% ****************************************************************************
+\begin{document}
+
+% <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+% FRONT MATTER
+% <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+%\frontmatter
+
+%% Book Cover, Title Page and Copyright Page
+%% ------------------------------------------------------------
+%\pagenumbering{roman}              % roman: lower-case Roman numbers ex. viii
+%\pagestyle{empty}                  % no header or footers
+\include{content/titlepage} 
+
+%% Dedication, Abstract, Preface, Acknowledgments, ...
+%% ------------------------------------------------------------
+%\pagestyle{plain}                  % display just page numbers  
+%\input{}
+
+%% Table of Contents ( ToC )
+%% ------------------------------------------------------------
+\renewcommand{\contentsname}{目錄}  
+\tableofcontents
+%\listoffigures                      % List of Figures ( lof )
+%\listoftables                       % List of Tables ( lot )
+
+% <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+% BODY MATTER ( Content )
+% <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+%\mainmatter
+%\pagenumbering{arabic}             
+%\input{content.tex} 
+\input{example.tex}
+
+% <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+% BACK MATTER ( Appendix )
+% <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+%\backmatter
+\appendix
+
+%% Glossaries
+%% ------------------------------------------------------------
+
+%% Index
+%% ------------------------------------------------------------
+%\printindex
+
+%% Bibliography & References
+%% ------------------------------------------------------------
+\printbibliography[headings=參考文獻]
+\end{document}

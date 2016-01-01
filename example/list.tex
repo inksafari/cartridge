@@ -1,0 +1,94 @@
+\chapter{List}
+
+\section{Ordered List}
+1. Lorem ipsum dolor sit amet, consectetur\footnote{ \url{www.example.com}} adipiscing elit.
+
+2. Duis ac mi magna, a consectetur elit\footnote{ Plain text.}.
+
+3. Curabitur posuere erat \emph{dignissim ligula euismod} ut euismod nisi.
+
+%% ------------------------------------------------------------
+\subsection{enumerate}
+\begin{enumerate}
+  \item 第一項
+  \item 第二項
+  \item 第三項
+  \begin{enumerate}
+    \item 第一層嵌套
+    \begin{enumerate}
+      \item 第二層嵌套
+      \begin{enumerate}
+        \item 第三層嵌套（最多嵌套三層）
+      \end{enumerate}
+    \end{enumerate}
+  \end{enumerate}
+  \item 第四項
+\end{enumerate}
+%% ------------------------------------------------------------
+\subsubsection{自訂}
+\begin{enumerate}
+\item[一、] 來–來!音響的餘波,把她清冷冷的光輝,一絲絲涼爽秋風,僅七、八歲時的狀
+況,橋柱是否有傾斜,誰甘白受人家的欺負,樹要樹皮人要麵皮,鑼聲亦不響了,不知是兄哥或
+小弟,他就發出歡喜的呼喊，放不少鞭炮,光明已在前頭,也看得見濃墨一樣高低的樹林,街上還是鬧熱。
+
+\item[二、] 測試
+  \begin{enumerate}
+    \item[（一）] 第一子題
+    \item[（二）] 第二子題
+  \end{enumerate}
+
+\item[三、] 第三題。
+\end{enumerate}
+%% ------------------------------------------------------------
+\section{Unordered List}
+\begin{itemize}
+  \item 不嵌套
+  \begin{itemize}
+    \item 第一層嵌套
+    \begin{itemize}
+      \item 第二層嵌套
+      \begin{itemize}
+        \item 第三層嵌套（最多嵌套三層）
+      \end{itemize}
+    \end{itemize}
+  \end{itemize}
+  \item 不嵌套
+\end{itemize}
+
+\begin{itemize}
+  \item \blindtext[1]
+  \item \blindtext[1]
+  \item \blindtext[1]
+  \begin{itemize}
+    \item 第一層嵌套
+    \begin{itemize}
+      \item 第二層嵌套
+      \begin{itemize}
+        \item 第三層嵌套（最多嵌套三層）
+      \end{itemize}
+    \end{itemize}
+  \end{itemize}
+  \item \blindtext[1]
+\end{itemize}
+%% ------------------------------------------------------------
+\section{Description List}
+\begin{description}
+    \item[Biology] Study of life.
+    \item[Physics] Science of matter and its motion.
+    \item[Psychology] Scientific study of mental processes and behaviour.
+\end{description}
+
+%% ------------------------------------------------------------
+\section{Nested lists}
+\begin{itemize}
+    \item First level, itemize, first item
+    \begin{itemize}
+        \item Second level, itemize, first item
+        \item Second level, itemize, second item
+        \begin{enumerate}
+            \item Third level, enumerate, first item
+            \item Third level, enumerate, second item
+        \end{enumerate}
+    \end{itemize}
+    \item First level, itemize, second item
+\end{itemize}
